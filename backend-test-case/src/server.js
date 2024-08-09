@@ -7,7 +7,6 @@ const swaggerUi = require('swagger-ui-express');
 const apiRoutes = require('./routes/api');
 
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -41,6 +40,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(port, () => {
-  console.log(`Server berjalan di port: ${port}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app; 
