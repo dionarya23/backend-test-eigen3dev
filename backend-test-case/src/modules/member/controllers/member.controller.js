@@ -7,8 +7,8 @@ class MemberController {
   }
 
   async getAllMembers(req, res) {
-    const response = await this.memberService.getAllMembers();
-    return res.status(200).json(response)
+    const result = await this.memberService.getAllMembers();
+    return res.status(result.status).json(result)
   }
 }
 

@@ -10,7 +10,11 @@ class MemberService {
     const result = await this.memberModel.getAllMembers();
     DBHelper.throwResultErrorCode(result);
 
-    return result.rows;
+    return {
+      status: 200,
+      message: 'success',
+      data: result.rows
+    };
   }
 }
 
