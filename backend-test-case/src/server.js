@@ -13,15 +13,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const swaggerOptions = {
-    swaggerDefinition: {
-        info: {
-            title: 'Library API',
-            description: 'Library API Information',
-            version: '1.0.0',
-        },
-        servers: ['http://localhost:3000']
+  swaggerDefinition: {
+    openapi: '3.0.0',
+    info: {
+        title: 'Library API',
+        description: 'Library API Information',
+        version: '1.0.0',
     },
-    apis: ['./routes/*.js'],
+    servers: [
+        {
+            url: 'http://localhost:3000',
+            description: 'Local server'
+        }
+    ]
+},
+apis: ['./src/modules/book/routes/*.js', './src/modules/member/routes/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
