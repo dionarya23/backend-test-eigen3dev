@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const bookController = require('../controllers/bookController');
+const BookController = require('../controllers/book.controller');
 
-/**
+module.exports = (app) => {
+  const bookController = new BookController()
+
+  /**
  * @swagger
  * /book:
  *   get:
@@ -53,8 +54,7 @@ const bookController = require('../controllers/bookController');
  *       200:
  *         description: Success
  */
-router.get('/book/', bookController.getAllBooks);
-router.post('/book/borrow', bookController.borrowBook);
-router.post('/book/return', bookController.returnBook);
-
-module.exports = router;
+  app.get('/v1/book', bookController.getAllBooks);
+  app.get('/v1/book/borrow', bookController.borrowBook);
+  app.get('/v1/book.return', bookController.returnBook);
+};

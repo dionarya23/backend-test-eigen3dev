@@ -27,6 +27,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api', apiRoutes);
 
+app.group('/api', (router) => {
+  apiRoutes(router);
+});
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });

@@ -1,6 +1,7 @@
 const TABLE_NAME = {
   BOOK: 'books',
-  MEMBER: 'members'
+  MEMBER: 'members',
+  BORROWING: 'borrowings'
 }
 
 module.exports = {

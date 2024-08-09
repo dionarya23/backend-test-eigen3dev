@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const memberController = require('../controllers/memberController');
+const MemberController = require('../controllers/member.controller');
 
-/**
+module.exports = (app) => {
+  const memberController = new MemberController()
+
+  /**
  * @swagger
  * /member:
  *   get:
@@ -11,6 +12,5 @@ const memberController = require('../controllers/memberController');
  *       200:
  *         description: Success
  */
-router.get('/member', memberController.getAllMembers);
-
-module.exports = router;
+  app.get('/v1/member', memberController.getAllMembers);
+};
