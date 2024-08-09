@@ -1,5 +1,5 @@
 const memberRoute = require('../modules/member/routes/index');
 
-export default (app) => {
+module.exports = (app) => {
   memberRoute(app)
 };

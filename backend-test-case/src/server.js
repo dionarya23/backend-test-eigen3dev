@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const apiRoutes = require('./routes/api');
 
@@ -25,11 +27,9 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.use('/api', apiRoutes);
-
-app.group('/api', (router) => {
-  apiRoutes(router);
-});
+const apiRouter = express.Router();
+apiRoutes(apiRouter);
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

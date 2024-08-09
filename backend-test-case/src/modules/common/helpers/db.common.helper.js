@@ -1,4 +1,3 @@
-const Boom = require('@hapi/boom');
 const { 
   INTERNAL_SERVER_ERROR_MESSAGE
 } = require('../../../lib/errors/error.code');

@@ -10,7 +10,7 @@ class MemberService {
     const result = await this.memberModel.getAllMembers();
     DBHelper.throwResultErrorCode(result);
 
-    return result;
+    return result.rows;
   }
 }
 

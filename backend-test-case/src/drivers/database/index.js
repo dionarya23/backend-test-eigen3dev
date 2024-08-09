@@ -1,4 +1,4 @@
-const postgres = require('../../config/postgres')
+const postgres = require('../../config/db')
 const { Pool } = require('pg');
 
 const pool = new Pool({
