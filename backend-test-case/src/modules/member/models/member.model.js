@@ -16,6 +16,7 @@ class MemberModel {
         FROM ${this.tableName} m
         LEFT JOIN ${this.borrowingTableName} b ON m.id = b.member_id AND b.returned_at IS NULL
         GROUP BY m.id
+        ORDER BY created_at DESC
     `;
 
     const result = await this.db.query(query);

@@ -12,6 +12,7 @@ class BookModel {
     const query = `
       SELECT * FROM ${this.tableName} 
       WHERE id NOT IN (SELECT book_id FROM ${this.borrowingTableName} WHERE returned_at IS NULL)
+      ORDER BY created_at DESC
     `;
     const result = this.db.queryWithThrows(query);
     return result;
@@ -58,26 +59,31 @@ class BookModel {
     return result;
   }
 
-  async updatedBook(bookId) {
+  async updatedBook(bookId, forPurpose="deacrese") {
     const params = [bookId];
-    const query = `
+    let query = `
       UPDATE  ${this.tableName} SET stock = stock - 1 WHERE id = $1
     `;
+
+    if (forPurpose === "increase") {
+      query = `
+       UPDATE  ${this.tableName} SET stock = stock + 1 WHERE id = $1
+    `;
+    }
 
     const result = this.db.queryWithThrows(query, params);
     return result;
   }
 
   async updateBorrowingBook({
-    returnDate,
     borrowingId
   }) {
-    const params = [returnDate, borrowingId];
+    const params = [borrowingId];
     const query = `
-      UPDATE ${this.borrowingTableName} SET returned_at = $1 WHERE id = $2'
+      UPDATE ${this.borrowingTableName} SET returned_at = now() WHERE id = $1
     `;
 
-    const result = this.db.queryWithThrows(query, params);
+    const result = this.db.update(query, params);
     return result;
   }
 }

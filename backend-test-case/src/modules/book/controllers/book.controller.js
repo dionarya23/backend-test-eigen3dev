@@ -20,7 +20,12 @@ class BookController {
  }
  
  async returnBook(req, res) {
-
+  const { member_id, book_id } = req.body
+  const result = await this.bookService.returnBook({
+    memberId: member_id,
+    bookId: book_id
+  });
+  res.status(result.status).json(result);
  }
 }
 

@@ -68,12 +68,13 @@ class BookService {
     const resultBorrowed = await this.bookModel.getBorrowedBookByMemberIdAndBookId({memberId, bookId});
     DBHelper.checkEmpty(resultBorrowed);
 
-    const borrowing = borrowingResult.rows[0];
+
+    const borrowing = resultBorrowed.rows[0];
     const borrowDate = new Date(borrowing.borrowed_at);
     const returnDate = new Date();
     const diffDays = Math.ceil((returnDate - borrowDate) / (1000 * 60 * 60 * 24));
-    await this.bookModel.borrowingTableName({ returnDate, borrowingId: borrowing.id });
-    await this.bookModel.updatedBook(bookId);
+    await this.bookModel.updateBorrowingBook({ borrowingId: borrowing.id });
+    await this.bookModel.updatedBook(bookId, "increase");
 
     if (diffDays > 7) {
         const penaltyEndDate = new Date(returnDate.getTime() + (3 * 24 * 60 * 60 * 1000));

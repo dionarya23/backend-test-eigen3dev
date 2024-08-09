@@ -13,7 +13,7 @@ class DBCommonService {
       return result;
     } catch (ex) {
       Logger().error(`Postgres Query Error : ${ex.code} - ${JSON.stringify(ex)}`);
-      throw new Error(ex.message);
+      throw new Error('Postgres Query Error');
     }
   }
 
@@ -36,7 +36,7 @@ class DBCommonService {
       const result = await this.updateWithThrows(query, params);
       return result;
     } catch (ex) {
-      return { errorCode: JSON.parse(ex.message).errorCode };
+      return { errorCode: 500 };
     }
   }
 

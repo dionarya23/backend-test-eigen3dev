@@ -95,7 +95,7 @@ module.exports = (app) => {
  *       404:
  *         description: The specified book or member was not found
  */
-  app.get('/v1/book/borrow', bookController.borrowBook);
+  app.post('/v1/book/borrow', bookController.borrowBook);
 
 /**
  * @swagger
@@ -126,5 +126,5 @@ module.exports = (app) => {
  *         description: The specified book or member was not found
  */
 
-  app.get('/v1/book/return', bookController.returnBook);
+  app.post('/v1/book/return', bookController.returnBook);
 };
